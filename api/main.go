@@ -20,6 +20,8 @@ import (
 
 const Port = "8080"
 
+const Version = "0.1.0"
+
 // Result stores httpstat info.
 type Result struct {
 	// The following are duration for each phase
