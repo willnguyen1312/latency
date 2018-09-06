@@ -2,23 +2,30 @@
   <v-container>
     <v-layout row wrap style="height: 80vh;">
       <v-flex xs10 offset-xs1>
-        <v-layout row wrap>
-        <v-flex xs10>
-        <v-text-field
-          label="url"
-          single-line
-          outline
-          v-model="url"
-          @keyup.enter.native="go()"
-          ></v-text-field>
 
-        </v-flex>
-        <v-flex xs2>
-          <v-btn color="primary" :loading="loading" :disabled="!canGo || loading" @click="go()">
-            Go
-          </v-btn>
-        </v-flex>
+        <v-layout row wrap>
+          <v-flex xs10>
+            <v-text-field
+              label="url"
+              single-line
+              outline
+              v-model="url"
+              @keyup.enter.native="go()"
+              ></v-text-field>
+
+          </v-flex>
+          <v-flex xs2>
+            <v-btn color="primary" :loading="loading" :disabled="!canGo || loading" @click="go()">
+              Go
+            </v-btn>
+          </v-flex>
         </v-layout>
+        <v-alert
+          v-model="error"
+          type="error"
+          >
+          {{ errorMsg }}
+        </v-alert>
       </v-flex>
 
       <div id="chart"></div>
@@ -48,6 +55,8 @@ export default {
     url: '',
     loading: false,
     data: null,
+    error: false,
+    errorMsg: '',
   }),
   computed: {
     canGo() {
@@ -69,14 +78,24 @@ export default {
   },
   methods: {
     async go() {
+      this.error = false;
+      this.errorMsg = '';
       this.loading = true;
-      let data = await Promise.all(getURLs(this.url).map(u => axios.get(u)));
-      data = data.map(d => d.data.data);
-      console.log(data);
-      Vue.nextTick(() => {
-        this.renderChart(data);
+
+      try {
+        let data = await Promise.all(getURLs(this.url).map(u => axios.get(u)));
+        data = data.map(d => d.data.data);
+        console.log(data);
+        Vue.nextTick(() => {
+          this.renderChart(data);
+          this.loading = false;
+        });
+      } catch (err) {
+        this.error = true;
+        this.errorMsg = err.toString();
+      } finally {
         this.loading = false;
-      });
+      }
     },
     reflowChart() {
       setTimeout(() => {
