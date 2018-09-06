@@ -126,20 +126,25 @@ export default {
           valueSuffix: ' ms',
         },
         series: [{
-          name: 'DNS Lookup',
-          data: [data[0].dns_lookup, data[1].dns_lookup],
-        }, {
-          name: 'TCP Connection',
-          data: [data[0].tcp_connection, data[1].tcp_connection],
+          name: 'Content Transfer',
+          data: [data[0].content_transfer, data[1].content_transfer],
+          color: '#b7f0f8',
         }, {
           name: 'TLS Handshake',
           data: [data[0].tls_handshake, data[1].tls_handshake],
+          color: '#66d9e8',
         }, {
           name: 'Server Processing',
           data: [data[0].server_processing, data[1].server_processing],
+          color: '#72c3fc',
         }, {
-          name: 'Content Transfer',
-          data: [data[0].content_transfer, data[1].content_transfer],
+          name: 'TCP Connection',
+          data: [data[0].tcp_connection, data[1].tcp_connection],
+          color: '#91a7ff',
+        }, {
+          name: 'DNS Lookup',
+          data: [data[0].dns_lookup, data[1].dns_lookup],
+          color: '#b197fc',
         }],
       });
     },
