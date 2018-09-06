@@ -20,7 +20,7 @@ import (
 
 const Port = "8080"
 
-const Version = "0.1.1"
+const Version = "0.1.2"
 
 // Result stores httpstat info.
 type Result struct {
