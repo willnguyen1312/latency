@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/astroflow/astroflow-go"
 	"github.com/astroflow/astroflow-go/log"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"io"
 	"io/ioutil"
@@ -20,7 +21,7 @@ import (
 
 const Port = "8080"
 
-const Version = "0.1.2"
+const Version = "1.0.0"
 
 // Result stores httpstat info.
 type Result struct {
@@ -91,6 +92,7 @@ func main() {
 	)
 
 	r := gin.Default()
+	r.Use(cors.Default())
 
 	r.GET("*url", func(c *gin.Context) {
 		u := c.Param("url")
