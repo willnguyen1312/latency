@@ -101,7 +101,10 @@ export default {
           title: {
             text: null,
           },
-          type: 'datetime',
+          stackLabels: {
+            enabled: true,
+            format: '{total} ms',
+          },
         },
         legend: {
           reversed: true,
@@ -109,6 +112,14 @@ export default {
         plotOptions: {
           series: {
             stacking: 'normal',
+          },
+          bar: {
+            stacking: 'normal',
+            dataLabels: {
+              enabled: true,
+              color: 'white',
+              format: '{y} ms',
+            },
           },
         },
         tooltip: {
