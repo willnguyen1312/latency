@@ -94,7 +94,7 @@ export default {
           text: 'Latency',
         },
         xAxis: {
-          categories: ['us', 'eu'],
+          categories: ['eu', 'us'],
         },
         yAxis: {
           min: 0,
