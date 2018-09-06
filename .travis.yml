@@ -1,0 +1,42 @@
+sudo: required
+
+services:
+  - docker
+
+language: go
+
+go:
+  - 1.11
+
+env:
+  - GO111MODULE=on
+
+git:
+  depth: false
+  submodules: false
+
+before_script:
+  - go get -u github.com/astrocorp42/flint
+  - go get
+  - make test
+  - make
+
+script:
+  - make all
+  - make docker
+
+before_deploy:
+  - export VERSION=$(cat version/version.go| grep "\sVersion" | cut -d '"' -f2) # for docker provider
+
+deploy:
+  provider: script
+  skip_cleanup: true # Important, otherwise the build output would be purged.
+  # use rocket to deploy itself :)
+  script: dist/rocket
+  on:
+    repo: astrocorp42/rocket
+    tags: true # The deployment happens only if the commit has a tag
+
+notifications:
+  email:
+    on_success: never
