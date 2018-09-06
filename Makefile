@@ -1,4 +1,4 @@
-.PHONY: all clean webapp api reall deploy
+.PHONY: all clean webapp api reall deploy_api
 
 reall: clean all
 
@@ -13,6 +13,6 @@ webapp:
 clean:
 	rm -rf webapp/dist api/api
 
-deploy:
+deploy_api:
 	rocket -c api/.rocket_eu.toml
 	rocket -c api/.rocket_us.toml

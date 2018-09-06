@@ -1,7 +1,4 @@
-sudo: required
-
-services:
-  - docker
+sudo: false
 
 language: go
 
@@ -17,16 +14,14 @@ git:
 
 before_script:
   - go get -u github.com/astrocorp42/rocket
-  - make test
-  - make
+  - cd api && go get
 
 script:
-  - make all
-
+  - make api
 
 deploy:
   provider: script
-  script: make deploy
+  script: make deploy_api
 
 notifications:
   email:
