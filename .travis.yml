@@ -14,7 +14,7 @@ git:
 
 before_script:
   - go get -u github.com/astrocorp42/rocket
-  - cd api && go get
+  - cd api && go get && cd ..
 
 script:
   - make api
