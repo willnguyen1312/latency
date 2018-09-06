@@ -8,7 +8,7 @@ api:
 	cd api && go build
 
 webapp:
-	cd webapp && npm run build
+	cd webapp && npm run install && npm run build
 
 clean:
 	rm -rf webapp/dist api/api
